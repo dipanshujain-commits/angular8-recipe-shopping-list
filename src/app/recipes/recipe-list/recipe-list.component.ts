@@ -1,6 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { EventEmitter } from '@angular/core';
 import { RecipeService } from '../recipe.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,17 +11,19 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeListComponent implements OnInit {
 
- // @Output() recipeWasSelected = new EventEmitter<Recipe>();
   recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeServie: RecipeService,
+              private router: Router,
+              private activeRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.recipes = this.recipeService.getRecipes(); // we get copy of recipes array in service file here
+  ngOnInit(): void {
+    //We get a copy of recipes array and not the original recipes
+    this.recipes = this.recipeServie.getRecipes();
   }
 
-  onRecipeSelected(recipe: Recipe) {
-  //  this.recipeWasSelected.emit(recipe);
+  newRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.activeRoute});
   }
 
 }

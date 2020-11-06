@@ -1,14 +1,15 @@
+<!--Display recipe items list-->
 <div class="row">
     <div class="col-xs-12">
-       <button class="btn btn-success">New Recipe</button>
+        <button class="btn btn-success" (click)="newRecipe()">New Recipe</button>
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-recipe-item *ngFor = "let recipeElement of recipes"
-         [recipe] = "recipeElement"
-         (recipeSelected) = "onRecipeSelected(recipeElement)"></app-recipe-item>
+       <app-recipe-item *ngFor="let recipeItem of recipes; let id=index;" 
+       [recipe]="recipeItem" [recipeId]="id"></app-recipe-item>
     </div>
 </div>
+
 
